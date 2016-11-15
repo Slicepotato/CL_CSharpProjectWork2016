@@ -15,7 +15,7 @@ namespace Manticore.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            return View(db.Movies.ToList());
+            return View(db.Movies.OrderBy(M => M.Year).ToList());
         }
 
         // GET: Product/Details/5
