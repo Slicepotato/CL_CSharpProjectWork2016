@@ -15,6 +15,7 @@ namespace Manticore.Controllers
         // GET: Product
         public ActionResult Index()
         {
+            // So when I return the list to the view we can order them by the year
             return View(db.Movies.OrderBy(M => M.Year).ToList());
         }
 
@@ -27,6 +28,7 @@ namespace Manticore.Controllers
             }
 
             Movie movie = db.Movies.Find(id);
+            // If it cant find a movie, just throw a 404
             if(movie == null)
             {
                 return HttpNotFound();
@@ -52,6 +54,7 @@ namespace Manticore.Controllers
                 // TODO: Add insert logic here
                 if(ModelState.IsValid)
                 {
+                    // add the movie to the db and bring us back to the list after form processing
                     db.Movies.Add(movie);
                     db.SaveChanges();
                     return RedirectToAction("Index");
